@@ -104,15 +104,15 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 	fmt.Printf("Aval = %d, Bval = %d\n", Aval, Bval)
 
 	// Write the state back to the ledger
-	err = stub.PutState(A, []byte(strconv.Itoa(Aval)))
-	if err != nil {
-		return nil, err
-	}
+//	err = stub.PutState(A, []byte(strconv.Itoa(Aval)))
+//	if err != nil {
+//		return nil, err
+//	}
 
-	err = stub.PutState(B, []byte(strconv.Itoa(Bval)))
-	if err != nil {
-		return nil, err
-	}
+//	err = stub.PutState(B, []byte(strconv.Itoa(Bval)))
+//	if err != nil {
+//		return nil, err
+//	}
 
 	return nil, nil
 }
