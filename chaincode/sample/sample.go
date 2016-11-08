@@ -23,6 +23,7 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	var A, B string    // Entities
 	var Aval, Bval int // Asset holdings
 	var err error
+	var testVal string
 
 	if len(args) != 4 {
 		return nil, errors.New("Incorrect number of arguments. Expecting 4")
@@ -51,6 +52,13 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	if err != nil {
 		return nil, err
 	}
+	testVal = "testVal";
+	err =stub.PutState("test", []byte(testVal))
+	if err != nil {
+		return nil, err
+	}
+
+
 
 	return nil, nil
 }
@@ -162,7 +170,9 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 
 	jsonResp := "{\"Name\":\"" + A + "\",\"Amount\":\"" + string(Avalbytes) + "\"}"
 	fmt.Printf("Query Response:%s\n", jsonResp)
-	return Avalbytes, nil
+	//return Avalbytes, nil
+	return stub.GetState("test"), nil
+
 }
 
 func main() {
