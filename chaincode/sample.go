@@ -111,6 +111,12 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) ([]byte, erro
 		return nil, err
 	}
 
+
+	err = stub.PutState("coucou", "francois")
+	if err != nil {
+		return nil, err
+	}
+
 	return nil, nil
 }
 
@@ -147,7 +153,8 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface) ([]byte, error
 	A = args[0]
 
 	// Get the state from the ledger
-	Avalbytes, err := stub.GetState(A)
+	//Avalbytes, err := stub.GetState(A)
+	Avalbytes, err := stub.GetState("coucou")
 	if err != nil {
 		jsonResp := "{\"Error\":\"Failed to get state for " + A + "\"}"
 		return nil, errors.New(jsonResp)
