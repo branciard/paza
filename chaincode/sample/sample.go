@@ -42,9 +42,9 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	var A, B string    // Entities
 	var Aval, Bval int // Asset holdings
 	var err error
-	var user string
 
-	user, nil :=t.get_username(stub)
+
+	user, err :=t.get_username(stub)
 	fmt.Printf("Init - t.get_username()",string(user ))
 
 
@@ -91,7 +91,7 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 	var X int          // Transaction value
 	var err error
 
-	user, nil :=t.get_username(stub)
+	user, err :=t.get_username(stub)
 	fmt.Printf("Invoke - t.get_username()",string(user ))
 
 
@@ -168,7 +168,7 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 		return nil, errors.New("Invalid query function name. Expecting \"query\"")
 	}
 
-	user, nil :=t.get_username(stub)
+	user, err :=t.get_username(stub)
 	fmt.Printf("Query - t.get_username()",string(user ))
 
 
