@@ -11,6 +11,7 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
+	"crypto/x509"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
@@ -32,10 +33,10 @@ func (t *SimpleChaincode) get_username(stub shim.ChaincodeStubInterface) (string
 
 	bytes, err := stub.GetCallerCertificate();
 	if err != nil { return "", errors.New("Couldn't retrieve caller certificate") }
-	//x509Cert, err := x509.ParseCertificate(bytes);				// Extract Certificate from result of GetCallerCertificate
+	x509Cert, err := x509.ParseCertificate(bytes);				// Extract Certificate from result of GetCallerCertificate
 	if err != nil { return "", errors.New("Couldn't parse certificate")	}
 
-	return string(bytes), nil
+	return x509Cert.Subject.CommonName, nil
 }
 
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
