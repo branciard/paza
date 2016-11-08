@@ -28,7 +28,7 @@ type SimpleChaincode struct {
 //				  Returns the username as a string.
 //==============================================================================================================================
 
-func (t *SimpleChaincode) get_username(stub *shim.ChaincodeStub) (string, error) {
+func (t *SimpleChaincode) get_username(stub shim.ChaincodeStubInterface) (string, error) {
 
 	bytes, err := stub.GetCallerCertificate();
 	if err != nil { return "", errors.New("Couldn't retrieve caller certificate") }
