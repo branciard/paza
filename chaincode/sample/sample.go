@@ -172,7 +172,7 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 	var A string // Entities
 	var err error
 
-	fmt.Printf("Query - t.get_username()", t.get_username(stub))
+	//fmt.Printf("Query - t.get_username()", t.get_username(stub))
 
 	if len(args) != 1 {
 		return nil, errors.New("Incorrect number of arguments. Expecting name of the person to query")
