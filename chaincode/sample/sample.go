@@ -15,15 +15,42 @@ import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
 
+
+
+type Asset struct {
+	AssetId            string `json:"assetId"`
+	Name               string `json:"name"`
+}
+
+
+
+
 // SimpleChaincode example simple Chaincode implementation
 type SimpleChaincode struct {
+}
+
+//==============================================================================================================================
+//	 get_caller - Retrieves the username of the user who invoked the chaincode.
+//				  Returns the username as a string.
+//==============================================================================================================================
+
+func (t *SimpleChaincode) get_username(stub *shim.ChaincodeStub) (string, error) {
+
+	bytes, err := stub.GetCallerCertificate();
+	if err != nil { return "", errors.New("Couldn't retrieve caller certificate") }
+	//x509Cert, err := x509.ParseCertificate(bytes);				// Extract Certificate from result of GetCallerCertificate
+	if err != nil { return "", errors.New("Couldn't parse certificate")	}
+
+	return bytes, nil
 }
 
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	var A, B string    // Entities
 	var Aval, Bval int // Asset holdings
 	var err error
-	var testVal string
+
+	fmt.Printf("Init - t.get_username()", t.get_username(stub))
+
 
 	if len(args) != 4 {
 		return nil, errors.New("Incorrect number of arguments. Expecting 4")
@@ -52,13 +79,6 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	if err != nil {
 		return nil, err
 	}
-	testVal = "testVal";
-	err =stub.PutState("test", []byte(testVal))
-	if err != nil {
-		return nil, err
-	}
-
-
 
 	return nil, nil
 }
@@ -74,6 +94,8 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 	var Aval, Bval int // Asset holdings
 	var X int          // Transaction value
 	var err error
+
+	fmt.Printf("Invoke - t.get_username()", t.get_username(stub))
 
 	if len(args) != 3 {
 		return nil, errors.New("Incorrect number of arguments. Expecting 3")
@@ -150,6 +172,8 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 	var A string // Entities
 	var err error
 
+	fmt.Printf("Query - t.get_username()", t.get_username(stub))
+
 	if len(args) != 1 {
 		return nil, errors.New("Incorrect number of arguments. Expecting name of the person to query")
 	}
@@ -170,9 +194,7 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 
 	jsonResp := "{\"Name\":\"" + A + "\",\"Amount\":\"" + string(Avalbytes) + "\"}"
 	fmt.Printf("Query Response:%s\n", jsonResp)
-	//return Avalbytes, nil
-	return stub.GetState("test"), nil
-
+	return Avalbytes, nil
 }
 
 func main() {
