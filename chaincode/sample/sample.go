@@ -35,7 +35,7 @@ func (t *SimpleChaincode) get_username(stub *shim.ChaincodeStub) (string, error)
 	//x509Cert, err := x509.ParseCertificate(bytes);				// Extract Certificate from result of GetCallerCertificate
 	if err != nil { return "", errors.New("Couldn't parse certificate")	}
 
-	return bytes, nil
+	return String(bytes), nil
 }
 
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
