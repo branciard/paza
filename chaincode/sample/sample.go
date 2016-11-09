@@ -24,6 +24,17 @@ import (
 type SimpleChaincode struct {
 }
 
+
+//==============================================================================================================================
+//	User - Struct for storing the JSON of a user and their ecert
+//==============================================================================================================================
+
+type User struct {
+	name string `json:"name"`
+	eCert string `json:"ecert"`
+}
+
+
 //==============================================================================================================================
 //	 get_caller - Retrieves the username of the user who invoked the chaincode.
 //				  Returns the username as a string.
@@ -42,24 +53,20 @@ func (t *SimpleChaincode) get_username(stub shim.ChaincodeStubInterface) (string
 }
 
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
-	var A, B, user string    // Entities
+	var A, B string    // Entities
 	var Aval, Bval int // Asset holdings
 	var err error
 
-
-	//user, err :=t.get_username(stub)
-	//fmt.Printf("Init - t.get_username()",string(user))
 
 	if len(args) > 4 {
 		user = args[4]
 	}
 
 
-	fmt.Printf("Init = %s\n", user)
 
-	//if len(args) != 4 {
-//		return nil, errors.New("Incorrect number of arguments. Expecting 4")
-//	}
+	if len(args) != 4 {
+		return nil, errors.New("Incorrect number of arguments. Expecting 4")
+	}
 
 	// Initialize the chaincode
 	A = args[0]
@@ -142,15 +149,15 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 	fmt.Printf("Aval = %d, Bval = %d\n", Aval, Bval)
 
 	// Write the state back to the ledger
-//	err = stub.PutState(A, []byte(strconv.Itoa(Aval)))
-//	if err != nil {
-//		return nil, err
-//	}
+	err = stub.PutState(A, []byte(strconv.Itoa(Aval)))
+	if err != nil {
+		return nil, err
+	}
 
-//	err = stub.PutState(B, []byte(strconv.Itoa(Bval)))
-//	if err != nil {
-//		return nil, err
-//	}
+	err = stub.PutState(B, []byte(strconv.Itoa(Bval)))
+	if err != nil {
+		return nil, err
+	}
 
 
 	return nil, nil
