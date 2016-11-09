@@ -57,9 +57,6 @@ const (
 //AssetHandler provides APIs used to perform operations
 type assetHandler struct {
 }
-//DepositoryHandler provides APIs used to perform operations on CC's KV store
-type depositoryHandler struct {
-}
 
 // NewAssetHandler create a new reference to AssetHandler
 func NewAssetHandler() *assetHandler {
