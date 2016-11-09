@@ -25,4 +25,5 @@ Setup environnement
      - launch on one terminal :
       docker exec -it paza-sample /bin/bash
       node app-sample
+     it works if :Query Response:{"Name":"b","Amount":"21"}
     
