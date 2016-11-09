@@ -13,7 +13,7 @@ Setup environnement
 - run it
     - go into docker directory
     - create the sample image by tapping :
-    docker build -t branciard/paza-sample .
+    docker build --no-cache=true -t branciard/paza-sample .
     - go into docker/sample directory et type :
    docker-compose up -d
     - check the the 3 containers with 
