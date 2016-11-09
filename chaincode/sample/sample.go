@@ -11,7 +11,7 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
-	//"crypto/x509"
+	"crypto/x509"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
