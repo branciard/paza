@@ -34,8 +34,8 @@ peer:
     - membersrvc
 
 paza:
-  container_name: paza-sample
-  image: branciard/paza-sample
+  container_name: paza-asset
+  image: branciard/paza-asset
   volumes:
     # tweak this to map a local developmnt directory tree into the container
     - ~/paza:/user/branciard/paza
