@@ -163,4 +163,6 @@ function invoke(user) {
       console.log("Failed to invoke chaincode: request=%j, error=%k",invokeRequest,error);
       process.exit(1);
    });
+
+
 }

@@ -11,7 +11,6 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
-	"crypto/x509"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
@@ -25,43 +24,17 @@ type SimpleChaincode struct {
 }
 
 
-//==============================================================================================================================
-//	User - Struct for storing the JSON of a user and their ecert
-//==============================================================================================================================
-
-type User struct {
-	name string `json:"name"`
-	eCert string `json:"ecert"`
-}
-
 
 //==============================================================================================================================
 //	 get_caller - Retrieves the username of the user who invoked the chaincode.
 //				  Returns the username as a string.
 //==============================================================================================================================
 
-func (t *SimpleChaincode) get_username(stub shim.ChaincodeStubInterface) (string, error) {
-
-	bytes, err := stub.GetCallerCertificate();
-
-	if err != nil { return "", errors.New("Couldn't retrieve caller certificate") }
-	x509Cert, err := x509.ParseCertificate(bytes);				// Extract Certificate from result of GetCallerCertificate
-	if err != nil { return "", errors.New("Couldn't parse certificate")	}
-
-	return x509Cert.Subject.CommonName, nil
-
-}
 
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	var A, B string    // Entities
 	var Aval, Bval int // Asset holdings
 	var err error
-
-
-	if len(args) > 4 {
-		user = args[4]
-	}
-
 
 
 	if len(args) != 4 {
