@@ -55,7 +55,7 @@ const (
 )
 
 //AssetHandler provides APIs used to perform operations
-type assetHandler struct {
+type AssetHandler struct {
 }
 
 // NewAssetHandler create a new reference to AssetHandler
