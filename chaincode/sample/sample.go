@@ -12,14 +12,6 @@ limitations under the License.
 */
 package main
 
-import (
-	"github.com/hyperledger/fabric/core/chaincode/shim"
-	"github.com/hyperledger/fabric/core/errors"
-)
-
-
-
-
 
 // the orginal code is here. https://github.com/hyperledger/fabric/blob/master/examples/chaincode/go/chaincode_example02/chaincode_example02.go
 // the goal of this chaincode is just to test if the project environement  works and is up and running. ready to dev ...
