@@ -5,10 +5,10 @@ package main
 
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
-	"github.com/hyperledger/fabric/core/errors"
 )
 
 type AssetChaincode struct {
