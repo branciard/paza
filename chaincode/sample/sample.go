@@ -24,13 +24,6 @@ type SimpleChaincode struct {
 }
 
 
-
-//==============================================================================================================================
-//	 get_caller - Retrieves the username of the user who invoked the chaincode.
-//				  Returns the username as a string.
-//==============================================================================================================================
-
-
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	var A, B string    // Entities
 	var Aval, Bval int // Asset holdings
@@ -79,10 +72,6 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 	var Aval, Bval int // Asset holdings
 	var X int          // Transaction value
 	var err error
-
-	user, err :=t.get_username(stub)
-	fmt.Printf("Invoke - t.get_username()",string(user ))
-
 
 
 	if len(args) != 3 {
@@ -161,12 +150,6 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 
 	var A string // Entities
 	var err error
-
-	user, err :=t.get_username(stub)
-	fmt.Printf("Query - t.get_username()",string(user ))
-
-	val, err := stub.ReadCertAttribute("position")
-	fmt.Printf("Position => %v error %v \n", string(val), err)
 
 	if len(args) != 1 {
 		return nil, errors.New("Incorrect number of arguments. Expecting name of the person to query")
