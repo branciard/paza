@@ -11,7 +11,7 @@ import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
 
-var assetHandler = NewAssetHandler()
+var aHandler = NewAssetHandler()
 
 type AssetChaincode struct {
 }
@@ -24,7 +24,7 @@ func (t *AssetChaincode) Init(stub shim.ChaincodeStubInterface, function string,
 		return nil, errors.New("Incorrect number of arguments. Expecting 0")
 	}
 
-	return nil, assetHandler.createTable(stub)
+	return nil, aHandler.createTable(stub)
 
 }
 
