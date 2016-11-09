@@ -42,22 +42,24 @@ func (t *SimpleChaincode) get_username(stub shim.ChaincodeStubInterface) (string
 }
 
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
-	var A, B string    // Entities
+	var A, B, user string    // Entities
 	var Aval, Bval int // Asset holdings
 	var err error
 
 
-	user, err :=t.get_username(stub)
-	fmt.Printf("Init - t.get_username()",string(user ))
+	//user, err :=t.get_username(stub)
+	//fmt.Printf("Init - t.get_username()",string(user))
 
-
-	myname, err :=stub.VerifyAttribute("name","Joe");
-
-	fmt.Printf("Init - stub.VerifyAttribute",string(myname ))
-
-	if len(args) != 4 {
-		return nil, errors.New("Incorrect number of arguments. Expecting 4")
+	if len(args) > 4 {
+		user = args[4]
 	}
+
+
+	fmt.Printf("Init = %s\n", user)
+
+	//if len(args) != 4 {
+//		return nil, errors.New("Incorrect number of arguments. Expecting 4")
+//	}
 
 	// Initialize the chaincode
 	A = args[0]
