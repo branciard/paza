@@ -2,7 +2,6 @@
 package main
 
 import (
-	"errors"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
@@ -58,6 +57,9 @@ const (
 //AssetHandler provides APIs used to perform operations
 type assetHandler struct {
 }
+//DepositoryHandler provides APIs used to perform operations on CC's KV store
+type depositoryHandler struct {
+}
 
 // NewAssetHandler create a new reference to AssetHandler
 func NewAssetHandler() *assetHandler {
@@ -92,7 +94,7 @@ func (t *assetHandler) createTable(stub shim.ChaincodeStubInterface) error {
 // queryTable returns the record row matching a correponding asset ID on the chaincode state table
 // stub: chaincodestub
 // assetID: assetID
-func (t *depositoryHandler) queryTable(stub shim.ChaincodeStubInterface, assetID string) (shim.Row, error) {
+func (t *assetHandler) queryTable(stub shim.ChaincodeStubInterface, assetID string) (shim.Row, error) {
 
 	var columns []shim.Column
 	col1 := shim.Column{Value: &shim.Column_String_{String_: assetID}}

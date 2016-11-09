@@ -11,10 +11,11 @@ import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
 
+var assetHandler = NewAssetHandler()
+
 type AssetChaincode struct {
 }
 
-var assetHandler = NewAssetHandler()
 
 func (t *AssetChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 
