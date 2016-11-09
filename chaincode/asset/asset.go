@@ -5,15 +5,15 @@ package main
 
 
 import (
-	"errors"
 	"fmt"
-	"strconv"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
+	"github.com/hyperledger/fabric/core/errors"
 )
 
 type AssetChaincode struct {
 }
+
 var assetHandler = NewAssetHandler()
 
 func (t *AssetChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
@@ -45,8 +45,9 @@ func (t *AssetChaincode) delete(stub shim.ChaincodeStubInterface, args []string)
 func (t *AssetChaincode) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 
 
-	return Avalbytes, nil
+	return nil, nil
 }
+
 func main() {
 	err := shim.Start(new(AssetChaincode))
 	if err != nil {

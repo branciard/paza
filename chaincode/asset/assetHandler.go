@@ -95,7 +95,7 @@ func (t *assetHandler) createTable(stub shim.ChaincodeStubInterface) error {
 func (t *depositoryHandler) queryTable(stub shim.ChaincodeStubInterface, assetID string) (shim.Row, error) {
 
 	var columns []shim.Column
-	col1 := shim.Column{Value: &shim.Column_String_{String_: ASSET_ID}}
+	col1 := shim.Column{Value: &shim.Column_String_{String_: assetID}}
 	columns = append(columns, col1)
 
 	return stub.GetRow(tableColumn, columns)
