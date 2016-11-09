@@ -31,14 +31,14 @@ type SimpleChaincode struct {
 
 func (t *SimpleChaincode) get_username(stub shim.ChaincodeStubInterface) (string, error) {
 
-	bytes, err := stub.GetCallerMetadata(); //stub.GetCallerCertificate();
+	bytes, err := stub.GetCallerCertificate();
 
 	if err != nil { return "", errors.New("Couldn't retrieve caller certificate") }
-	//x509Cert, err := x509.ParseCertificate(bytes);				// Extract Certificate from result of GetCallerCertificate
+	x509Cert, err := x509.ParseCertificate(bytes);				// Extract Certificate from result of GetCallerCertificate
 	if err != nil { return "", errors.New("Couldn't parse certificate")	}
 
-	//return x509Cert.Subject.CommonName, nil
-	return string(bytes), nil
+	return x509Cert.Subject.CommonName, nil
+
 }
 
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
@@ -50,6 +50,9 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	user, err :=t.get_username(stub)
 	fmt.Printf("Init - t.get_username()",string(user ))
 
+
+	val, err := stub.ReadCertAttribute("position")
+	fmt.Printf("Position => %v error %v \n", string(val), err)
 
 	if len(args) != 4 {
 		return nil, errors.New("Incorrect number of arguments. Expecting 4")
@@ -96,6 +99,8 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 
 	user, err :=t.get_username(stub)
 	fmt.Printf("Invoke - t.get_username()",string(user ))
+	val, err := stub.ReadCertAttribute("position")
+	fmt.Printf("Position => %v error %v \n", string(val), err)
 
 
 	if len(args) != 3 {
@@ -176,6 +181,9 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 
 	user, err :=t.get_username(stub)
 	fmt.Printf("Query - t.get_username()",string(user ))
+
+	val, err := stub.ReadCertAttribute("position")
+	fmt.Printf("Position => %v error %v \n", string(val), err)
 
 	if len(args) != 1 {
 		return nil, errors.New("Incorrect number of arguments. Expecting name of the person to query")
