@@ -50,7 +50,10 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	user, err :=t.get_username(stub)
 	fmt.Printf("Init - t.get_username()",string(user ))
 
-	fmt.Printf("Init - user is ",string(args[3]))
+
+	myname, err :=stub.VerifyAttribute("name","Joe");
+
+	fmt.Printf("Init - stub.VerifyAttribute",string(myname ))
 
 	if len(args) != 4 {
 		return nil, errors.New("Incorrect number of arguments. Expecting 4")
@@ -147,7 +150,6 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 //		return nil, err
 //	}
 
-	fmt.Printf("Invoke - user is ",string(args[3]))
 
 	return nil, nil
 }
@@ -190,7 +192,7 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 
 	A = args[0]
 
-	fmt.Printf("Query - user is ",string(args[1]))
+
 
 	// Get the state from the ledger
 	Avalbytes, err := stub.GetState(A)
