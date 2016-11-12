@@ -4,6 +4,7 @@ package main
 import (
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
+	"github.com/hyperledger/fabric/core/errors"
 )
 
 
@@ -30,8 +31,8 @@ const   RESERVE_ASSET_TX  			=  5
 const   CANCEL_RESERVE_ASSET_REQUEST_TX  	=  6
 const   CANCEL_RESERVE_ASSET_REQUESTED_TX  	=  7
 const   REQUEST_FOR_ASSET_OWNERSHIP_TX  	=  8
-const   ACCEPT_ASSET_OWNERSHIP_REQUEST_TX  	=  9
-const   REFUSE_ASSET_OWNERSHIP_REQUEST_TX  	=  10
+const   ACCEPT_ASSET_OWNERSHIP_REQUESTED_TX  	=  9
+const   REFUSE_ASSET_OWNERSHIP_REQUESTED_TX  	=  10
 const   GIVE_ASSET_OWNERSHIP_TX  		=  11
 const   ACCEPT_ASSET_OWNERSHIP_GIVEN_TX  	=  12
 const   REFUSE_ASSET_OWNERSHIP_GIVEN_TX  	=  13
@@ -84,6 +85,79 @@ func (t *assetHandler) createTable(stub shim.ChaincodeStubInterface) error {
 
 	})
 
+}
+
+
+func (t *assetHandler) destroyAsset(stub shim.ChaincodeStubInterface, assetID string) error {
+	//TODO destroyAsset
+	return nil
+}
+
+
+
+func (t *assetHandler) createAsset(stub shim.ChaincodeStubInterface, assetID string) error {
+	//TODO createAsset
+	return nil
+}
+
+func (t *assetHandler) updateAsset(stub shim.ChaincodeStubInterface, assetID string) error {
+	//TODO updateAsset
+	return nil
+}
+
+func (t *assetHandler) offerAsset(stub shim.ChaincodeStubInterface, assetID string) error {
+	//TODO offerAsset
+	return nil
+}
+func (t *assetHandler) cancelOfferAsset(stub shim.ChaincodeStubInterface, assetID string) error {
+	//TODO cancelOfferAsset
+	return nil
+}
+
+func (t *assetHandler) reserveAsset(stub shim.ChaincodeStubInterface, assetID string) error {
+	//TODO reserveAsset
+	return nil
+}
+
+func (t *assetHandler) cancelReserveAssetRequest(stub shim.ChaincodeStubInterface, assetID string) error {
+	//TODO cancelReserveAssetRequest
+	return nil
+}
+
+
+func (t *assetHandler) cancelReserveAssetRequested(stub shim.ChaincodeStubInterface, assetID string) error {
+	//TODO cancelReserveAssetRequested
+	return nil
+}
+
+func (t *assetHandler) requestForAssetOwnership(stub shim.ChaincodeStubInterface, assetID string) error {
+	//TODO requestForAssetOwnership
+	return nil
+}
+
+func (t *assetHandler) acceptAssetOwnershipRequest(stub shim.ChaincodeStubInterface, assetID string) error {
+	//TODO acceptAssetOwnershipRequest
+	return nil
+}
+
+func (t *assetHandler) refuseAssetOwnershipRequest(stub shim.ChaincodeStubInterface, assetID string) error {
+	//TODO acceptAssetOwnershipRequest
+	return nil
+}
+
+func (t *assetHandler) giveAssetOwnership(stub shim.ChaincodeStubInterface, assetID string) error {
+	//TODO giveAssetOwnership
+	return nil
+}
+
+func (t *assetHandler) acceptAssetOwnershipGiven(stub shim.ChaincodeStubInterface, assetID string) error {
+	//TODO acceptAssetOwnershipGiven
+	return nil
+}
+
+func (t *assetHandler) refuseAssetOwnershipGiven(stub shim.ChaincodeStubInterface, assetID string) error {
+	//TODO acceptAssetOwnershipGiven
+	return nil
 }
 
 
